@@ -15,6 +15,7 @@ type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {
   state: DrawerNavigationState;
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
+  buildLink: (name: string, params?: object) => string;
 };
 
 /**
@@ -24,6 +25,7 @@ export default function DrawerItemList({
   state,
   navigation,
   descriptors,
+  buildLink,
   activeTintColor,
   inactiveTintColor,
   activeBackgroundColor,
@@ -45,6 +47,7 @@ export default function DrawerItemList({
             ? title
             : route.name
         }
+        to={buildLink(route.name)}
         icon={drawerIcon}
         focused={focused}
         activeTintColor={activeTintColor}

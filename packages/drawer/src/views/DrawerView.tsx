@@ -36,6 +36,7 @@ import DrawerOpenContext from '../utils/DrawerOpenContext';
 import DrawerPositionContext from '../utils/DrawerPositionContext';
 
 type Props = DrawerNavigationConfig & {
+  buildLink: (name: string, params?: object) => string;
   state: DrawerNavigationState;
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
@@ -71,6 +72,7 @@ export default function DrawerView({
   state,
   navigation,
   descriptors,
+  buildLink,
   lazy = true,
   drawerContent = (props: DrawerContentComponentProps) => (
     <DrawerContent {...props} />
@@ -159,6 +161,7 @@ export default function DrawerView({
       <DrawerPositionContext.Provider value={drawerPosition}>
         {drawerContent({
           ...drawerContentOptions,
+          buildLink,
           progress: progress,
           state: state,
           navigation: navigation,

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   useNavigationBuilder,
+  useLinkBuilder,
   createNavigatorFactory,
   DefaultNavigatorOptions,
   TabRouter,
@@ -37,9 +38,12 @@ function BottomTabNavigator({
     screenOptions,
   });
 
+  const buildLink = useLinkBuilder({ state, navigation });
+
   return (
     <BottomTabView
       {...rest}
+      buildLink={buildLink}
       state={state}
       navigation={navigation}
       descriptors={descriptors}

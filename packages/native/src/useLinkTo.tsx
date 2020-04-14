@@ -4,11 +4,11 @@ import {
   getStateFromPath,
   getActionFromState,
 } from '@react-navigation/core';
-import LinkingContext from './LinkingContext';
+import LinkingOptionsContext from './LinkingOptionsContext';
 
 export default function useLinkTo() {
   const navigation = useNavigation();
-  const getOptions = React.useContext(LinkingContext);
+  const getOptions = React.useContext(LinkingOptionsContext);
 
   const linkTo = React.useCallback(
     (path: string) => {

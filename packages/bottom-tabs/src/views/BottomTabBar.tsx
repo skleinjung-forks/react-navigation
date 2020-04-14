@@ -34,6 +34,7 @@ export default function BottomTabBar({
   state,
   navigation,
   descriptors,
+  buildLink,
   activeBackgroundColor,
   activeTintColor,
   adaptive = true,
@@ -254,6 +255,7 @@ export default function BottomTabBar({
             >
               <NavigationRouteContext.Provider value={route}>
                 <BottomTabItem
+                  to={buildLink(route.name)}
                   route={route}
                   focused={focused}
                   horizontal={shouldUseHorizontalLabels()}

@@ -134,6 +134,7 @@ export type DrawerContentComponentProps<T = DrawerContentOptions> = T & {
   state: DrawerNavigationState;
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
+  buildLink: (name: string, params?: object) => string;
   /**
    * Animated node which represents the current progress of the drawer's open state.
    * `0` is closed, `1` is open.

@@ -19,6 +19,7 @@ type Props = BottomTabNavigationConfig & {
   state: TabNavigationState;
   navigation: BottomTabNavigationHelpers;
   descriptors: BottomTabDescriptorMap;
+  buildLink: (name: string, params?: object) => string;
 };
 
 type State = {
@@ -71,6 +72,7 @@ export default class BottomTabView extends React.Component<Props, State> {
       tabBarOptions,
       state,
       navigation,
+      buildLink,
     } = this.props;
 
     const { descriptors } = this.props;
@@ -87,6 +89,7 @@ export default class BottomTabView extends React.Component<Props, State> {
       state: state,
       descriptors: descriptors,
       navigation: navigation,
+      buildLink,
     });
   };
 

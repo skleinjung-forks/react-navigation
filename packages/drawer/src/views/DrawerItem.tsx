@@ -27,6 +27,10 @@ type Props = {
     color: string;
   }) => React.ReactNode;
   /**
+   * URL to use for the link to the tab.
+   */
+  to?: string;
+  /**
    * Whether to highlight the drawer item as active.
    */
   focused?: boolean;
@@ -70,6 +74,7 @@ export default function DrawerItem(props: Props) {
     icon,
     label,
     labelStyle,
+    to,
     focused = false,
     activeTintColor = colors.primary,
     inactiveTintColor = Color(colors.text).alpha(0.68).rgb().string(),
@@ -90,6 +95,7 @@ export default function DrawerItem(props: Props) {
 
   return (
     <View
+      data-to={to}
       collapsable={false}
       {...rest}
       style={[styles.container, { borderRadius, backgroundColor }, style]}

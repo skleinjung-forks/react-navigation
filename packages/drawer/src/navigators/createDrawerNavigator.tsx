@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   createNavigatorFactory,
   useNavigationBuilder,
+  useLinkBuilder,
   DefaultNavigatorOptions,
   DrawerNavigationState,
   DrawerRouterOptions,
@@ -38,9 +39,12 @@ function DrawerNavigator({
     screenOptions,
   });
 
+  const buildLink = useLinkBuilder({ state, navigation });
+
   return (
     <DrawerView
       {...rest}
+      buildLink={buildLink}
       state={state}
       descriptors={descriptors}
       navigation={navigation}

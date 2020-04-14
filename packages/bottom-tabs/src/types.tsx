@@ -194,8 +194,10 @@ export type BottomTabBarProps = BottomTabBarOptions & {
   state: TabNavigationState;
   descriptors: BottomTabDescriptorMap;
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
+  buildLink: (name: string, params?: object) => string;
 };
 
 export type BottomTabBarButtonProps = TouchableWithoutFeedbackProps & {
+  to?: string;
   children: React.ReactNode;
 };

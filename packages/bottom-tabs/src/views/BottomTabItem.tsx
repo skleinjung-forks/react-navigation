@@ -38,6 +38,10 @@ type Props = {
     color: string;
   }) => React.ReactNode;
   /**
+   * URL to use for the link to the tab.
+   */
+  to?: string;
+  /**
    * The button for the tab. Uses a `TouchableWithoutFeedback` by default.
    */
   button?: (props: BottomTabBarButtonProps) => React.ReactNode;
@@ -104,8 +108,9 @@ export default function BottomTabBarItem({
   route,
   label,
   icon,
-  button = ({ children, style, ...rest }: BottomTabBarButtonProps) => (
-    <TouchableWithoutFeedback {...rest}>
+  to,
+  button = ({ to, children, style, ...rest }: BottomTabBarButtonProps) => (
+    <TouchableWithoutFeedback data-to={to} {...rest}>
       <View style={style}>{children}</View>
     </TouchableWithoutFeedback>
   ),
@@ -146,6 +151,8 @@ export default function BottomTabBarItem({
     if (typeof label === 'string') {
       return (
         <Animated.Text
+          href={to}
+          accessibilityRole="link"
           numberOfLines={1}
           style={[
             styles.label,
@@ -196,6 +203,7 @@ export default function BottomTabBarItem({
     : inactiveBackgroundColor;
 
   return button({
+    to,
     onPress,
     onLongPress,
     testID,

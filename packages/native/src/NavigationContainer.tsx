@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/core';
 import ThemeProvider from './theming/ThemeProvider';
 import DefaultTheme from './theming/DefaultTheme';
-import LinkingContext from './LinkingContext';
+import LinkingOptionsContext from './LinkingOptionsContext';
 import useThenable from './useThenable';
 import useLinking from './useLinking';
 import useBackButton from './useBackButton';
@@ -67,7 +67,7 @@ const NavigationContainer = React.forwardRef(function NavigationContainer(
   }
 
   return (
-    <LinkingContext.Provider value={linkingContext}>
+    <LinkingOptionsContext.Provider value={linkingContext}>
       <ThemeProvider value={theme}>
         <BaseNavigationContainer
           {...rest}
@@ -75,7 +75,7 @@ const NavigationContainer = React.forwardRef(function NavigationContainer(
           ref={refContainer}
         />
       </ThemeProvider>
-    </LinkingContext.Provider>
+    </LinkingOptionsContext.Provider>
   );
 });
 

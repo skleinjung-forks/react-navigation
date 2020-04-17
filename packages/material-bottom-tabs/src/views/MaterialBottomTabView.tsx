@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { BottomNavigation, DefaultTheme, DarkTheme } from 'react-native-paper';
+import { BottomNavigation, DefaultTheme, DarkTheme, useTheme as useThemeFromPaper } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   Route,
   TabNavigationState,
   TabActions,
-  useTheme,
+  useTheme as useThemeFromReactNavigation,
 } from '@react-navigation/native';
 
 import {
@@ -29,20 +29,27 @@ export default function MaterialBottomTabView({
   descriptors,
   ...rest
 }: Props) {
-  const { dark, colors } = useTheme();
+  const paperTheme = useThemeFromPaper()
+  const { dark: paperThemeIsDark, colors: paperColors } = paperTheme
+  const { dark: navigationThemeIsDark, colors: navigationColors } = useThemeFromReactNavigation();
 
   const theme = React.useMemo(() => {
-    const t = dark ? DarkTheme : DefaultTheme;
+    let paperThemeToUse
+    if (navigationThemeIsDark) {
+      paperThemeToUse = paperThemeIsDark ? paperTheme : DarkTheme
+    } else {
+      paperThemeToUse = paperThemeIsDark ? DefaultTheme : paperTheme
+    }
 
     return {
-      ...t,
+      ...paperThemeToUse,
       colors: {
-        ...t.colors,
-        ...colors,
-        surface: colors.card,
+        ...navigationColors,
+        surface: navigationColors.card,
+        ...paperThemeToUse.colors,
       },
     };
-  }, [colors, dark]);
+  }, [navigationColors, navigationThemeIsDark, paperColors, paperTheme, paperThemeIsDark]);
 
   return (
     <BottomNavigation
